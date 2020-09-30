@@ -26,6 +26,7 @@ namespace WebUI.Controllers
         }
         public IActionResult RelatorioDesenvolvedor()
         {
+            ViewBag.Relatorio = new Business.Report.RelatorioFuncionarioBusiness().RelatorioDesenvolvedores();
             return View();
         }
     }

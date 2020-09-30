@@ -1,7 +1,8 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    List<Database.Developer> developers = ViewBag.Relatorio;
 }
-
+@model Business.Report.RelatorioFuncionarioBusiness;
 
 <!DOCTYPE html>
 <html>
@@ -20,7 +21,34 @@
     <header>
         <h1 class="titulo-pagina">Relatório</h1>
 
+        <div>
+            
+            <table class="table">
+                <tr>
+                    <th>DataCadastro</th>
+                    <th>Status</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>LevelID</th>
+                    <th>HorasTrab</th>
+                    <th>Salário</th>
+                </tr>
+                @foreach (var dev in developers)
+                {
+                    <tr>
+                        <td>@dev.DataCadastro</td>
+                        <td>@dev.Status</td>
+                        <td>@dev.Nome</td>
+                        <td>@dev.Email</td>
+                        <td>@dev.LevelID</td>
+                        <td>@dev.HorasTrab</td>
+                    </tr>
 
+                }
+            </table>
+            
+
+        </div>
 
     </header>
 

@@ -11,7 +11,6 @@ namespace Database
     {
         public int HorasTrab { get; set; }
         public int LevelID { get; set; }
-        
 
         public List<Developer> Developers()
         {
@@ -23,7 +22,7 @@ namespace Database
             DataCadastro = DateTime.Now;
             Status = true;
         }
-        public Developer(DateTime dateTime, string nome, string email, int horasTrab, int levelEnum)
+        public Developer(DateTime dateTime, string nome, string email, int horasTrab)
         {
             var level = new Level();
 

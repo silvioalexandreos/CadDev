@@ -67,3 +67,8 @@ header {
         background: darkgreen;
         transform: scale(1.2);
     }
+
+/*Tela de Relatório de Desenvolvedores*/
+table, th, td {
+    border: 1px solid black;
+}

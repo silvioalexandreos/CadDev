@@ -22,12 +22,12 @@ namespace Business.Report
 
             foreach (var row in paginaDB.Niveis.ToList())
             {
-                var pagina = new Level();
-                pagina.Id = Convert.ToInt32(row.Id);
-                pagina.Descricao = row.Descricao;
-                pagina.VlrHora = Convert.ToInt32(row.VlrHora);
+                var level = new Level();
+                level.Id = Convert.ToInt32(row.Id);
+                level.Descricao = row.Descricao;
+                level.VlrHora = Convert.ToInt32(row.VlrHora);
 
-                lista.Add(pagina);
+                lista.Add(level);
             }
             return lista;
         }
