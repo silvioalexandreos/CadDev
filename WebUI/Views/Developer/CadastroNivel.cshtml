@@ -1,6 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Cadastro Nível";
-    
+    List<Business.Report.Level> levels = ViewBag.Listas;
 }
 
 <!DOCTYPE html>
@@ -18,7 +18,22 @@
     </header>
 
     <main>
-
+        <div>
+            <table class="table">
+                <tr>
+                    <td>Descrição</td>
+                    <td>Valor horas</td>
+                </tr>
+                @foreach (var level in levels)
+                {
+                    <tr>
+                        <td>@level.Descricao</td>
+                        <td>@level.VlrHora</td>
+                    </tr>
+                }
+            </table>
+        </div>
+        
         <form class="form">
 
             <fieldset>
