@@ -49,6 +49,10 @@ namespace WebUI
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                    name: "developer_salvar",
+                    pattern: "{controller=Developer}/{action=Salvar}/{id?}");
+
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Developer}/{action=Index}/{id?}");
             });
