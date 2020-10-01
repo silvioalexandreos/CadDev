@@ -27,9 +27,20 @@
             <label for="email" class="label">Email:</label>
             <input type="email" id="email" class="input-padrao" required asp-for="@Model.Email" />
 
-            <label> 1 - Junior </label>
-            <label> 3 - Pleno </label>
-            <label> 4 - Senior </label>
+            <div>
+                <table class="table">
+                    <tr>
+                        @foreach (var item in levels)
+                        {
+                        <td>
+                            @item.Id - @item.Descricao
+                        </td>
+                            }
+                    
+                    </tr>
+                </table>
+            </div>
+            
             <fieldset>
                 <legend for="levelid" class="label">Selecione o nível</legend>
                 <select id="levelid" class="fieldset-select" asp-for="@Model.LevelID">

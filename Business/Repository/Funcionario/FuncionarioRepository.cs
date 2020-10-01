@@ -27,9 +27,6 @@ namespace Business.Repository
             {
                 conexao.Desenvolvedores.Add(dev);
                 conexao.SaveChanges();
-                Console.WriteLine("Cadastro Salvo com sucesso...");
-                Console.WriteLine("Pressione qualquer tecla para voltar ao menu incial.");
-                Console.ReadLine();
             }
         }
 
