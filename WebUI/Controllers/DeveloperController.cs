@@ -21,12 +21,6 @@ namespace WebUI.Controllers
             ViewBag.Listas = new Business.Report.Level().Lista();
             return View();
         }
-
-        [HttpPost]
-        public void SalvarLevel(Database.Level level)
-        {
-
-        }
         
         [HttpPost]
         public void SalvarDeveloper(Database.Developer developer)
@@ -39,14 +33,25 @@ namespace WebUI.Controllers
 
         }
 
-        
         public IActionResult CadastroNivel()
         {
             ViewBag.Listas = new Business.Report.Level().Lista();
+
             return View();
+        }
+
+        [HttpPost]
+        public void SalvarNivel(Database.Level level)
+        {
+
+            var lev = new Business.Repository.FuncaoRepository();
+            lev.SalvarFuncao(level);
+
+            Response.Redirect("CadastroNivel");
         }
         public IActionResult RelatorioDesenvolvedor()
         {
+            ViewBag.Relatorio = new Business.Report.RelatorioFuncionarioBusiness().RelatorioDesenvolvedores();
             return View();
         }
     }
