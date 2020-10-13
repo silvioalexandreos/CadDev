@@ -12,20 +12,12 @@ namespace Database
         public double VlrHora { get; set; }
 
 
+        public double ValidaCampoVlrHoras(double vlrHora)
+        {
+            if (vlrHora < 0) throw new Exception("Digite um valor positivo.");
 
-        //public string ValidaCampoDescricao(LevelEnum descricao)
-        //{
-        //    if (string.IsNullOrEmpty(descricao)) throw new Exception("Preencha o campo descrição corretamente.");
-
-        //    return descricao;
-        //}
-
-        //public double ValidaCampoVlrHoras(double vlrHora)
-        //{
-        //    if (vlrHora < 0) throw new Exception("Digite um valor positivo.");
-
-        //    return vlrHora;
-        //}
+            return vlrHora;
+        }
     }
-    
+
 }

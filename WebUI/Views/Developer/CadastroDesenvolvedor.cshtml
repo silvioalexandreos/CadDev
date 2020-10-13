@@ -3,6 +3,8 @@
     List<Business.Report.Level> levels = ViewBag.Listas;
 }
 
+@model Database.Developer;
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,26 +19,40 @@
         <h1 class="titulo-pagina">Cadastro Desenvolvedor</h1>
     </header>
 
-    <form class="form">
+    <form class="form" asp-action="SalvarDeveloper" method="post">
         <div>
             <label for="nome" class="label">Nome:</label>
-            <input type="text" id="nome" class="input-padrao" required />
+            <input type="text" asp-action="nome" id="nome" name="nome" class="input-padrao" required asp-for="@Model.Nome" />
 
             <label for="email" class="label">Email:</label>
-            <input type="email" id="email" class="input-padrao" required />
+            <input type="email" id="email" class="input-padrao" required asp-for="@Model.Email" />
 
+            <div>
+                <table class="table">
+                    <tr>
+                        @foreach (var item in levels)
+                        {
+                        <td>
+                            @item.Id - @item.Descricao
+                        </td>
+                            }
+                    
+                    </tr>
+                </table>
+            </div>
+            
             <fieldset>
-                <legend class="label">Selecione o nível</legend>
-                <select class="fieldset-select">
+                <legend for="levelid" class="label">Selecione o nível</legend>
+                <select id="levelid" class="fieldset-select" asp-for="@Model.LevelID">
                     @foreach (var item in levels)
                     {
-                        <option>@item.Descricao</option>
+                        <option>@item.Id</option>
                     }
                 </select>
             </fieldset>
 
-            <label for="horas-trabalhadas" class="label">Horas trabalhadas no mês:</label>
-            <input type="number" id="horas-trabalhadas" class="input-padrao" required placeholder="100" />
+            <label for="horasTrab" class="label">Horas trabalhadas no mês:</label>
+            <input type="number" id="horasTrab" class="input-padrao" required placeholder="100" asp-for="@Model.HorasTrab" />
 
             <input type="submit" value="Salvar" class="salvar" />
         </div>

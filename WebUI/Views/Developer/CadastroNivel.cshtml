@@ -1,7 +1,8 @@
 ﻿@{
     ViewData["Title"] = "Cadastro Nível";
-    
+    List<Business.Report.Level> levels = ViewBag.Listas;
 }
+@model Database.Level;
 
 <!DOCTYPE html>
 <html>
@@ -18,19 +19,30 @@
     </header>
 
     <main>
+        <div>
+            <table class="table">
+                <tr>
+                    <td>Descrição</td>
+                    <td>Valor horas</td>
+                </tr>
+                @foreach (var level in levels)
+                {
+                    <tr>
+                        <td>@level.Descricao</td>
+                        <td>@level.VlrHora</td>
+                    </tr>
+                }
+            </table>
+        </div>
+        
+        <form class="form" asp-action="SalvarNivel" method="post">
 
-        <form class="form">
-
-            <fieldset>
-                <legend class="label">Selecione o nível</legend>
-                <select class="fieldset-select">
-                    
-                </select>
-            </fieldset>
+            <label for="level" class="label">Nivél</label>
+            <input type="text" class="input-padrao" id="level" required asp-for="@Model.Descricao"/>
 
 
             <label for="valor-hora" class="label">Valor hora</label>
-            <input type="number" class="input-padrao" id="valor-hora" required placeholder="25" />
+            <input type="number" class="input-padrao" id="valor-hora" required placeholder="25" asp-for="@Model.VlrHora"/>
 
             <input type="submit" value="Salvar" class="salvar" />
         </form>

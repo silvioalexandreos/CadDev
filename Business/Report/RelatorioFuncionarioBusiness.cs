@@ -1,13 +1,48 @@
 using CadFuncionario;
 using Database;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 
-namespace Business
+namespace Business.Report
 {
     public class RelatorioFuncionarioBusiness
     {
+        public int HorasTrab { get; set; }
+        public int LevelID { get; set; }
+
+
+        public List<Developer> RelatorioDesenvolvedores()
+        {
+            using (var conexao = new Connection())
+            {
+                var listaDev = new List<Developer>();
+                var desenvolvedores = conexao.Desenvolvedores.ToList();
+                var niveis = conexao.Niveis.ToList();
+
+                foreach (var row in conexao.Desenvolvedores.ToList())
+                {
+                    var nivelDesenvolvedor = niveis.FirstOrDefault(x => x.Id == row.LevelID);
+
+
+                    var horaDesenvolvedor = nivelDesenvolvedor.VlrHora;
+                    var salario = (row.HorasTrab * horaDesenvolvedor);
+
+                    var dev = new Developer();
+                    dev.DataCadastro = Convert.ToDateTime(row.DataCadastro);
+                    dev.Status = row.Status;
+                    dev.Nome = row.Nome;
+                    dev.Email = row.Email;
+                    dev.HorasTrab = Convert.ToInt32(salario);
+                    dev.LevelID = row.LevelID;
+                    listaDev.Add(dev);
+                }
+                return listaDev;
+            }
+        }
+
+
         public void Exibir()
         {
             using (var conexao = new Connection())

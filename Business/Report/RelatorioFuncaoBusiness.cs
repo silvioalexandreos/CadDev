@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Business
+namespace BusinessBusiness.Report
 {
     public class RelatorioFuncaoBusiness
     {

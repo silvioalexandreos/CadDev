@@ -8,8 +8,29 @@ namespace Business.Repository
 {
     public class FuncionarioRepository
     {
+        public void SalvarFuncionario(Developer developer)
+        {
+            var dev = new Developer();
 
-        public void SalvarFuncionario(string nome, string email, int levelID, int qtdHoras)
+            dev.ValidaCampoNome(developer.Nome);
+            dev.Nome = developer.Nome;
+
+            dev.ValidarCampoEmail(developer.Email);
+            dev.Email = developer.Email;
+
+            dev.LevelID = developer.LevelID;
+
+            dev.ValidarCamposQtdHoras(developer.HorasTrab);
+            dev.HorasTrab = developer.HorasTrab;
+
+            using (var conexao = new Connection())
+            {
+                conexao.Desenvolvedores.Add(dev);
+                conexao.SaveChanges();
+            }
+        }
+
+        public void SalvarFuncionario(string nome, string email, int levelID, double qtdHoras)
         {
             var dev = new Developer();
 
