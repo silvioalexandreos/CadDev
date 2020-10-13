@@ -34,7 +34,7 @@ namespace Business.Report
                     dev.Status = row.Status;
                     dev.Nome = row.Nome;
                     dev.Email = row.Email;
-                    dev.HorasTrab = row.HorasTrab;
+                    dev.HorasTrab = Convert.ToInt32(salario);
                     dev.LevelID = row.LevelID;
                     listaDev.Add(dev);
                 }
