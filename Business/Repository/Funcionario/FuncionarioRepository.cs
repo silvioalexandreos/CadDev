@@ -30,7 +30,7 @@ namespace Business.Repository
             }
         }
 
-        public void SalvarFuncionario(string nome, string email, int levelID, int qtdHoras)
+        public void SalvarFuncionario(string nome, string email, int levelID, double qtdHoras)
         {
             var dev = new Developer();
 

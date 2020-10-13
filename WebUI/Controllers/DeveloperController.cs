@@ -49,6 +49,7 @@ namespace WebUI.Controllers
 
             Response.Redirect("CadastroNivel");
         }
+        [HttpGet]
         public IActionResult RelatorioDesenvolvedor()
         {
             ViewBag.Relatorio = new Business.Report.RelatorioFuncionarioBusiness().RelatorioDesenvolvedores();
