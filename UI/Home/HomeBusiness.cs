@@ -1,4 +1,5 @@
 ﻿using Business;
+using Business.Report;
 using CadFuncionario.Controller;
 using System;
 using UI;
