@@ -1,6 +1,5 @@
 ﻿
 using Business;
-using Business.CRUD.FuncionarioCRUD;
 using Business.Repository;
 using CadFuncionario.View;
 using Database.Domain.Enum;
@@ -16,12 +15,7 @@ namespace CadFuncionario.Controller
     
     public class FuncionarioView
     {
-        
-        public FuncionarioView()
-        {
-                
-        }
-
+     
         public void CadFuncionario()
         {
             FuncionarioRepository funcionarioRepository = new FuncionarioRepository();
