@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
 namespace WebUI
 {
@@ -37,6 +38,21 @@ namespace WebUI
             services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
 
             services.AddControllersWithViews();
+            //Configuração Swagger
+            services.AddSwaggerGen(d => 
+            {
+                d.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "CadDev",
+                    Description = "Api para cadastro de desenvolvedores",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Silvio Alexandre",
+                        Email = "silvio.alexandreos@gmail.com"
+                    }
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +70,14 @@ namespace WebUI
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            //Configuração Swagger
+            app.UseSwagger();
+            app.UseSwaggerUI(d =>
+            {
+                d.SwaggerEndpoint("/swagger/v1/swagger.json", "CadDev");
+                d.RoutePrefix = string.Empty;
+            });
 
             app.UseRouting();
 
