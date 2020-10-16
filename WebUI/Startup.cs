@@ -6,6 +6,8 @@ using Business.Repository.Base;
 using Business.Repository.Service.Developer;
 using CadFuncionario;
 using Database.Domain.Interface;
+using FluentNHibernate.Cfg;
+using FluentNHibernate.Cfg.Db;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -14,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using NHibernate.Tool.hbm2ddl;
 
 namespace WebUI
 {

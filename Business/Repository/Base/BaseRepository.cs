@@ -87,7 +87,6 @@ namespace Business.Repository.Base
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
@@ -106,7 +105,6 @@ namespace Business.Repository.Base
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
             return item;
