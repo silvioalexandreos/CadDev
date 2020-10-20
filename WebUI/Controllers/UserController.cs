@@ -1,35 +1,51 @@
-﻿
-
-using Business.Repository.Service.Developer;
+﻿using System;
+using System.Net;
+using System.Threading.Tasks;
 using Business.Repository.Service.User;
 using Database;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Net;
-using System.Threading.Tasks;
 using WebUI.Hash;
-using WebUI.Models;
-using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
 
 namespace WebUI.Controllers
 {
     [Route("api/[Controller]")]
     [ApiController]
-
-    public class DeveloperController : Controller
+    public class UserController : Controller
     {
-        private IDeveloperService _service;
         private IUserService _user;
-        public DeveloperController(IDeveloperService service, IUserService user)
+        public UserController( IUserService user)
         {
-            _service = service;
             _user = user;
         }
 
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        [Route("login")]
+        [AllowAnonymous]//Permite acesso anonimo a essa rota
+        public async Task<ActionResult<dynamic>> Authenticate([FromBody] User model)
+        {
+            var user = _user.Login(model.Username, model.Password);
+            if (user == null)
+                return NotFound(new { message = "Usuário ou senha inválido" });
+
+            var token = TokenService.GenerateToken(user.Result);
+            
+            return new
+            {
+                user = user,
+                token = token
+            };
+            
+        }
+
         [HttpGet]
-        [Route("Publico")]
+        [Route("Get")]
         [AllowAnonymous]
         public async Task<ActionResult> GetAll()
         {
@@ -40,7 +56,7 @@ namespace WebUI.Controllers
 
             try
             {
-                return Ok(await _service.GetAll());
+                return Ok(await _user.GetAll());
             }
             catch (ArgumentException ex)
             {
@@ -48,10 +64,10 @@ namespace WebUI.Controllers
                 return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
             }
         }
-        
+
         [HttpGet]
         [Authorize]
-        [Route("{id}", Name = "GetWihtId")]
+        [Route("{id}", Name = "GetId")]
         public async Task<ActionResult> Get(Guid id)
         {
             if (!ModelState.IsValid)
@@ -61,7 +77,7 @@ namespace WebUI.Controllers
 
             try
             {
-                return Ok (await _service.Get(id));
+                return Ok(await _user.Get(id));
             }
             catch (ArgumentException ex)
             {
@@ -71,8 +87,8 @@ namespace WebUI.Controllers
         }
         [HttpPost]
         [Route("cadastrar")]
-        [Authorize(Roles ="gerente,funcionario")]
-        public async Task<ActionResult> Post([FromBody]Database.Developer developer)
+        [Authorize(Roles = "gerente,funcionario")]
+        public async Task<ActionResult> Post([FromBody] Database.User user)
         {
             if (!ModelState.IsValid)
             {
@@ -81,10 +97,10 @@ namespace WebUI.Controllers
 
             try
             {
-                var result = await _service.Post(developer);
+                var result = await _user.Post(user);
                 if (result != null)
                 {
-                    return Created(new Uri(Url.Link("GetWihtId", new { id = result.Id })), result);
+                    return Created(new Uri(Url.Link("GetId", new { id = result.Id })), result);
                 }
                 else
                 {
@@ -101,7 +117,7 @@ namespace WebUI.Controllers
         [HttpPut]
         [Route("Atulizar")]
         [Authorize(Roles = "Gerente")]
-        public async Task<ActionResult> Put([FromBody] Database.Developer developer)
+        public async Task<ActionResult> Put([FromBody] Database.User user)
         {
             if (!ModelState.IsValid)
             {
@@ -110,7 +126,7 @@ namespace WebUI.Controllers
 
             try
             {
-                var result = await _service.Put(developer);
+                var result = await _user.Put(user);
                 if (result != null)
                 {
                     return Ok(result);
@@ -139,7 +155,7 @@ namespace WebUI.Controllers
 
             try
             {
-                return Ok(await _service.Delete(id));
+                return Ok(await _user.Delete(id));
             }
             catch (ArgumentException ex)
             {
