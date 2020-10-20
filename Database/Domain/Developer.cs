@@ -11,7 +11,7 @@ namespace Database
     {
         public double HorasTrab { get; set; }
         public int LevelID { get; set; }
-        
+
         public Developer()
         {
             DataCadastro = DateTime.Now;
