@@ -8,6 +8,7 @@ namespace Business.Repository.Service.Developer
 {
     public class DeveloperService : IDeveloperService
     {
+        //Transient , Scoped, Singleton
         private IRepository<Database.Developer> _repository;
         public DeveloperService(IRepository<Database.Developer> repository)
         {
